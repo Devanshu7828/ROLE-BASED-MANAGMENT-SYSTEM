@@ -1,0 +1,45 @@
+<div class="container main-table">
+  <div class="heading">
+    <h1>
+      <span class="goback" onclick="window.history.back()">←</span> All Users
+    </h1>
+  </div>
+  <% if (messages.error) { %>
+  <div class="flash-error">
+    <h1><%= messages.error %></h1>
+  </div>
+  <% } %> <% if (messages.deleted) { %>
+  <div class="flash-deleted">
+    <h1><%= messages.deleted %></h1>
+  </div>
+  <% } %>
+
+  <table class="table main-table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(function(user){ %>
+      <tr>
+        <td id="td-id"><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><a href="/admin/user/<%= user.id %>"> <%= user.email %> </a></td>
+        <td><%= user.role %></td>
+        <td>
+          <a href="/admin/user/<%= user.id %>"> view</a>/<a
+            href="/admin/user/delete/<%= user.id %>"
+          >
+            Delete</a
+          >
+        </td>
+      </tr>
+      <% })%>
+    </tbody>
+  </table>
+</div>
