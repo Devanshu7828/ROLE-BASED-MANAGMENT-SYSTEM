@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const { roles } = require("../utils/constant");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -17,11 +18,14 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minlength: 2,
     },
     confirmpassword: {
       type: String,
       required: true,
+    },
+    resetLink: {
+      data: String,
+      default:''
     },
     role: {
       type: String,
@@ -35,10 +39,6 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-    },
   },
   {
     timestamps: true,

@@ -829,3 +829,9 @@ ul.messages * {
 #td-id {
   width: 18rem;
 }
+
+.main-warning{
+  display:flex;
+  justify-content:center;
+  text-align: center;
+}

@@ -12,27 +12,17 @@ function init(passport) {
         // Check if email exist in db
 
         const user = await User.findOne({ email: email });
-
+        console.log(user);
         if (!user) {
           return done(null, false, {
             message: "No User Found With This ID",
           });
         }
 
-        // bcrypt
-        //   .compare(password, user.password)
-        //   .then((match) => {
-        //     if (match) {
-        //       return done(null, user, { message: "Logged in succesfully" });
-        //     }
-        //     return done(null, false, { message: "Wrong Details" });
-        //   })
-        //   .catch((err) => {
-        //     return done(null, false, { message: "Something went wrong!" });
-        //   });
         const isvalid = await user.validPassword(password);
+
         if (isvalid) {
-          const token = await user.generateToken();
+          // const token = await user.generateToken();
           return done(null, user, { message: "Logged in succesfully" });
         } else {
           return done(null, false, { message: "Wrong Details" });

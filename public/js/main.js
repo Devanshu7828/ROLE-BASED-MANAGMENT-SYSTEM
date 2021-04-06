@@ -59,3 +59,9 @@ import Noty from "noty";
   }
 })(jQuery);
 
+function checkBOx() {
+  const cb = document.getElementById('check');
+  console.log(cb.checked);
+}
+
+module.exports ={checkBOx};

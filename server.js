@@ -13,8 +13,8 @@ const session = require("express-session");
 const connectflash = require("express-flash");
 const passport = require("passport");
 const MongoDbStore = require("connect-mongo");
+const cookieParaser = require("cookie-parser")
 
-// show routes
 app.use(morgan("dev"));
 // DB
 require("./database/conn");
@@ -34,11 +34,14 @@ app.use(
   })
 );
 
+// 
+app.use(cookieParaser())
 // passport authentication
 const passportInit = require("./passportConfig/passport.config");
 passportInit(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // global middleware
 app.use((req, res, next) => {

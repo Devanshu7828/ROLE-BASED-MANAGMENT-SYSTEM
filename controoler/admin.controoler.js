@@ -1,6 +1,8 @@
 const User = require("../models/user.model");
 const mongoose = require("mongoose");
 const { roles } = require("../utils/constant");
+
+
 function userControoler() {
   return {
     async allUsers(req, res) {

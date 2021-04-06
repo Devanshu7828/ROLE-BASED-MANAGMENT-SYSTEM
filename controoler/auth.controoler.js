@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
+
 function authControoler() {
   return {
     prelogin(req, res) {
@@ -23,6 +24,10 @@ function authControoler() {
             req.flash("error", info.message);
             return next(err);
           }
+          const token = user.generateToken();
+          res.cookie("jwt", token, {
+            httpOnly: true,
+          });
 
           return res.redirect("/");
         });
@@ -59,7 +64,11 @@ function authControoler() {
             confirmpassword,
           });
 
-          const token = await user.generateToken();
+          const token = user.generateToken();
+
+          res.cookie("jwt", token, {
+            httpOnly: true,
+          });
           await user.save();
           return res.redirect("/auth/login");
         } else {
@@ -74,6 +83,7 @@ function authControoler() {
       req.logout();
       return res.redirect("/");
     },
+    
   };
 }
 

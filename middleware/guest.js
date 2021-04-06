@@ -22,7 +22,7 @@ async function ensureAdmin(req, res, next) {
   if (req.user.role === "ADMIN") {
     return next();
   } else {
-    req.flash("warning", "You are not Authorized to see this route");
+    req.flash("warning", "Only admin can access this route");
     return res.redirect("/");
   }
 }
